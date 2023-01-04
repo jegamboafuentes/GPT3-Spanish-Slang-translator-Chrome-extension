@@ -16,6 +16,7 @@ const insert = (content) => {
     const splitContent = content.split('\n');
 
     // Wrap in p tags
+    
     splitContent.forEach((content) => {
         const p = document.createElement('p');
 
@@ -29,9 +30,10 @@ const insert = (content) => {
         // Insert into HTML one at a time
         element.appendChild(p);
     });
-
+    
+   
     // Insert into HTML one at a time
-    element.appendChild(p);
+    //element.appendChild(p);
 
     // On success return true
     return true;
