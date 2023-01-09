@@ -6,6 +6,50 @@ const checkForKey = () => {
     });
 };
 
+//// Extension Parameters
+// Select From Country
+var selectFrom = document.querySelector(".selectFrom");
+//var selectFromOption = selectFrom.options[selectFrom.selectedIndex];
+var lastSelectedFrom = localStorage.getItem('selectFrom');
+//countrySelectFromText = selectFrom.options[selectFrom.selectedIndex].text;
+
+if (lastSelectedFrom) {
+    selectFrom.value = lastSelectedFrom;
+}
+
+selectFrom.onchange = function () {
+    lastSelectedFrom = selectFrom.options[selectFrom.selectedIndex].value;
+    lastSelectedFromText = selectFrom.options[selectFrom.selectedIndex].text;
+    localStorage.setItem('selectFrom', lastSelectedFrom);
+    chrome.storage.local.set({ 'settingFrom': lastSelectedFromText }, () => {
+    });
+}
+
+//End good //clean from here
+
+//countrySelectFrom = document.getElementById('countryFrom');
+//countrySelectFromText = countrySelectFrom.options[countrySelectFrom.selectedIndex].text;
+
+
+// saveParametersButton = document.getElementById('parametersButton');
+
+
+// saveParametersButton.addEventListener('click', () => {
+//     chrome.storage.local.set({ 'settingFrom': countrySelectFromText }, () => {
+//         console.log('data had been stored');
+//         getExtensionParameters();
+//     });
+// });
+
+// //
+// const getExtensionParameters = () => {
+//     const countrySelectFrom = document.getElementById('countryFrom');
+//     chrome.storage.sync.set({ "myCountryFrom": countrySelectFrom }, function () {
+//     });
+// };
+
+////
+
 const saveKey = () => {
     const input = document.getElementById('key_input');
 
@@ -43,4 +87,6 @@ checkForKey().then((response) => {
         document.getElementById('key_entered').style.display = 'block';
     }
 });
+
+//document.getElementById('parametersButton').addEventListener('click', getExtensionParameters);
 

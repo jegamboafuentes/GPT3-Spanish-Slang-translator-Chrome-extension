@@ -1,17 +1,56 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="index.css">
-    </head>
-    <body>
-        <div id="key_needed">
-            <p>To get started, add your OpenAI API Key!</p>
-            <input id="key_input" />
-            <button id="save_key_button">Add key</button>
-        </div>
-        <div id="key_entered">
-           <p>You entered your OpenAI API Key.</p>
-           <button id="change_key_button">Change key</button>
-        </div>
-    </body>
-    <script src="index.js"></script>
+
+<head>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div id="key_needed">
+        <p>To get started, add your OpenAI API Key!</p>
+        <input id="key_input" />
+        <button id="save_key_button">Add key</button>
+    </div>
+    <div id="key_entered">
+        <p>You entered your OpenAI API Key.</p>
+        <button id="change_key_button">Change key</button>
+        <p>Select the country you are translating from:</p>
+        <table>
+            <tr>
+                <th>Country From:</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>
+                    <select id="countryFrom" class="selectFrom">
+                        <option value="mx">Mexico</option>
+                        <option value="es">Spain</option>
+                        <option value="ar">Argentina</option>
+                        <option value="co">Colombia</option>
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Country To:</th>
+                <th>Tone</th>
+            </tr>
+            <tr>
+                <td>
+                    <select id="countryTo">
+                        <option value="mx">Mexico</option>
+                        <option value="es">Spain</option>
+                        <option value="ar">Argentina</option>
+                        <option value="co">Colombia</option>
+                    </select>
+                </td>
+                <td> <select id="tone">
+                        <option value="slang">Slang</option>
+                        <option value="neutral">Neutral</option>
+                    </select></td>
+            </tr>
+        </table>
+        <!-- <button id="parametersButton">Save Configurations</button> -->
+    </div>
+</body>
+<script src="index.js"></script>
 </html>

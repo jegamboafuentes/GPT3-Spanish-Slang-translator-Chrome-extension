@@ -9,6 +9,7 @@ const getKey = () => {
     });
 };
 
+
 const sendMessage = (content) => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         const activeTab = tabs[0].id;
@@ -40,7 +41,7 @@ const generate = async (prompt) => {
         body: JSON.stringify({
             model: 'text-davinci-003',
             prompt: prompt,
-            max_tokens: 250,
+            max_tokens: 255,
             temperature: 0.7,
         }),
     });
@@ -50,14 +51,61 @@ const generate = async (prompt) => {
     return completion.choices.pop();
 }
 
-const generateCompletionAction = async (info) => {
+/////
 
+var mySelectFrom = ""
+//var mySelectTo = ""
+
+function getExtensionParameters()  {
+    chrome.storage.local.get(['settingFrom'], (results) => {
+        console.log("AQUI WE!!");
+        console.log(results.settingFrom);
+        //mySelectFrom = results.settingFrom;
+        mySelectFrom =  results.settingFrom;
+    });
+}
+
+getExtensionParameters();
+
+// const getExtensionParameters = () => {
+//     return new Promise((resolve, reject) => {
+//         chrome.storage.local.get(['settingFrom'], (result) => {
+//             if (result['settingFrom']) {
+//                 //const decodedKey = atob(result['openai-key']);
+//                 const returnded = result['openai-key']
+//                 resolve(returnded);
+//             }
+//         });
+//     });
+// };
+
+
+//getExtensionParameters();
+//console.log(mySelectFrom);
+
+// old
+// const getParameters = () => {
+//     return new Promise((resolve, reject) => {
+//         chrome.storage.local.get(['myCountryFrom'], (result) => {
+//             console.log("getParameters function")
+//             console.log(result['myCountryFrom'])
+//             // if (result['myCountryFrom']) {
+//             //     resolve(result['myCountryFrom']);
+//             // }
+//         });
+//     });
+// };
+/////
+
+const generateCompletionAction = async (info) => {
+    await getExtensionParameters();
     try {
         sendMessage('generating...');
-
+        console.log('the var:');
+        console.log(mySelectFrom);
         const { selectionText } = info;
         const basePromptPrefix = `
-        Translate this phrase from Mexican Spanish (Slang) to Argentinian Spanish (Slang), making the phrase very neutral and understandable.
+        Translate this phrase from ` + 'Mexico' + ` Spanish (Slang) to ` + mySelectFrom + ` Spanish (Slang), making the phrase very neutral and understandable.
         Phrase in Mexican Spanish:`;
         const baseCompletion = await generate(`${basePromptPrefix}${selectionText}`);
 
